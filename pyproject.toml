@@ -1,0 +1,23 @@
+[project]
+name = "dr-grat-char"
+version = "0.1.0"
+description = "Characterization of a symmetric-facet dual-ruled grating for spatial heterodyne spectroscopy: CCD photometry, background subtraction, and MCMC fitting of grating-profile parameters against a GD-CALC surrogate."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "corner>=2.2.3",
+    "emcee>=3.1.6",
+    "funkyfresh",
+    "h5py>=3.16.0",
+    "ipython>=9.14.1",
+    "matplotlib>=3.10.9",
+    "matplotlib-inline>=0.2.2",
+    "numpy>=2.4.6",
+    "photutils>=3.0.0",
+    "scikit-image>=0.26.0",
+    "sif-parser>=0.3.6",
+    "tqdm>=4.67.3",
+]
+
+[tool.uv.sources]
+funkyfresh = { git = "https://github.com/zachariahmilby/funky-fresh.git" }

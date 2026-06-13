@@ -240,8 +240,7 @@ hand-drawn `beam_mask`) lives in `FRAME_CFG` inside
 
 ## License
 
-The code in this repository is released under **\<choose a license, e.g. MIT or
-BSD-3-Clause\>** — add a `LICENSE` file with your choice. Note that this license
+The code in this repository is released under an MIT license. Note that this license
 covers **only the code here**; it does **not** cover GD-CALC, which is the
 copyrighted work of Kenneth C. Johnson and is not redistributed (see
 [The GD-CALC dependency](#the-gd-calc-dependency)).

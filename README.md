@@ -155,7 +155,7 @@ produce CSVs named `tB<tB>_dt<dt>_land<land>.csv` (columns:
 `surrogate_model.py`:
 
 > GD-CALC (Grating Diffraction Calculator), Kenneth C. Johnson.
-> Code Ocean capsule, DOI [`10.24433/CO.7479617`](https://doi.org/10.24433/CO.7479617).
+> Code Ocean capsule, DOI [`10.24433/CO.7479617.v3`](https://doi.org/10.24433/CO.7479617.v3).
 > Please cite the specific version you use.
 
 ---
@@ -257,7 +257,7 @@ If you use this code, please cite the paper and the archived code/data record:
   title     = {Characterization of a symmetric-facet dual-ruled grating for spatial heterodyne spectroscopy},
   booktitle = {SPIE proceedings},
   year      = {2026},
-  doi       = {<paper DOI>}
+  doi       = {once available}
 }
 
 @misc{MeyerEA26_code,
@@ -269,5 +269,5 @@ If you use this code, please cite the paper and the archived code/data record:
 }
 ```
 
-Please also cite GD-CALC (DOI [`10.24433/CO.7479617`](https://doi.org/10.24433/CO.7479617))
+Please also cite GD-CALC (DOI [`10.24433/CO.7479617.v3`](https://doi.org/10.24433/CO.7479617.v3))
 as the source of the diffraction-efficiency forward model.

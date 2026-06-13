@@ -122,7 +122,7 @@ into a Python ≥ 3.11 environment, including `funkyfresh` from its Git URL.)
 The raw frames and the GD-CALC model grids total roughly **320 MB** and are
 archived on Zenodo:
 
-> **Data DOI:** `<INSERT ZENODO DOI HERE>`
+> **Data DOI:** 10.5281/zenodo.20682543
 
 Download and unpack the archive into the repository root so that the `data/` and
 `model/` directories sit alongside the scripts (see
@@ -252,20 +252,20 @@ copyrighted work of Kenneth C. Johnson and is not redistributed (see
 If you use this code, please cite the paper and the archived code/data record:
 
 ```bibtex
-@inproceedings{<your_key>,
-  author    = {<authors>},
-  title     = {<paper title>},
-  booktitle = {<SPIE proceedings>},
-  year      = {<year>},
+@inproceedings{MeyerEA26_characterization,
+  author    = {{Meyer}, C and {Flores}, J and {Corliss}, J and {Harris}, W},
+  title     = {Characterization of a symmetric-facet dual-ruled grating for spatial heterodyne spectroscopy},
+  booktitle = {SPIE proceedings},
+  year      = {2026},
   doi       = {<paper DOI>}
 }
 
-@misc{<your_data_key>,
-  author    = {<authors>},
-  title     = {Code and data for "<paper title>"},
-  year      = {<year>},
-  publisher = {Zenodo},
-  doi       = {<INSERT ZENODO DOI HERE>}
+@misc{MeyerEA26_code,
+  author    = {{Meyer}, C and {Flores}, J and {Corliss}, J and {Harris}, W},
+  title     = {Code and data for "Characterization of a symmetric-facet dual-ruled grating for spatial heterodyne spectroscopy"},
+  year      = 2026,
+  publisher = Zenodo,
+  doi       = 10.5281/zenodo.20682543
 }
 ```
 

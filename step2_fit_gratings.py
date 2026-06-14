@@ -47,7 +47,7 @@ from surrogate_model import init_surrogate
 set_style('AAS', silent=True)
 
 # Toggle to regenerate the stacked main-text efficiency-fit ("keystone") figure.
-MAKE_KEYSTONE = True
+MAKE_KEYSTONE = False
 
 # ---------------------------------------------------------------------------
 # Build the GD-CALC surrogate once, at import time. `model_wav` is the model
@@ -277,7 +277,7 @@ def run_mcmc(panel, nwalkers=config.NWALKERS, nsteps=config.NSTEPS, burnin=confi
     try:
         # c=None uses emcee's default automated autocorrelation window.
         tau = sampler.get_autocorr_time()
-        print(f"  Autocorr times (steps): dt = {tau[0]:.1f}, land = {tau[1]:.1f}")
+        print(f"  Autocorr times (steps): dt = {tau[0]:.1f}, facet duty cycle = {tau[1]:.1f}")
     except emcee.autocorr.AutocorrError:
         print("  Autocorr warning: chain too short to reliably estimate autocorrelation time.")
 
@@ -285,8 +285,12 @@ def run_mcmc(panel, nwalkers=config.NWALKERS, nsteps=config.NSTEPS, burnin=confi
     dt_med, land_med = np.median(flat, axis=0)
     dt_std, land_std = np.std(flat, axis=0)
 
-    print(f"\n  dt   = {dt_med:.3f} +/- {dt_std:.3f} deg")
-    print(f"  land = {land_med:.2f}  +/- {land_std:.2f}")
+    # `land_med` is the fit parameter; report it outwardly as facet duty cycle
+    # (= 100 - land). The standard deviation is unchanged by this offset.
+    facet_med = 100.0 - land_med
+
+    print(f"\n  dt               = {dt_med:.3f} +/- {dt_std:.3f} deg")
+    print(f"  facet duty cycle = {facet_med:.2f}  +/- {land_std:.2f} %")
 
     return sampler, (dt_med, land_med)
 
@@ -436,9 +440,15 @@ def plot_combined_mcmc(sampler, panel, figsize=(14, 5), width_ratios=(1, 1.5)):
     # Two independent sub-figures so `corner` is strictly confined to the left.
     subfigs = fig.subfigures(1, 2, width_ratios=width_ratios, wspace=0.05)
 
-    flat_chain = sampler.get_chain(flat=True)
-    full_chain = sampler.get_chain()
-    labels = [r'$\Delta\theta$ (deg)', 'land (\%)']
+    # Convert the land duty cycle (fit parameter) to facet duty cycle (= 100 - land)
+    # for display only. Transforming the samples keeps the corner-plot titles,
+    # quantiles, and trace axes all in facet-duty-cycle units, with the asymmetric
+    # error bars correctly reflected.
+    flat_chain = sampler.get_chain(flat=True).copy()
+    full_chain = sampler.get_chain().copy()
+    flat_chain[:, 1] = 100.0 - flat_chain[:, 1]
+    full_chain[:, :, 1] = 100.0 - full_chain[:, :, 1]
+    labels = [r'$\Delta\theta$ (deg)', '$D$ (\%)']
 
     # LEFT: corner plot.
     fig2 = corner.corner(

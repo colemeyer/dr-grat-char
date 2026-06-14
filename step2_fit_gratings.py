@@ -386,12 +386,45 @@ def plot_fit(ax, sampler, panel, dt, land, num_samples=300):
             else:
                 ax.plot([], [], c=sc[colors[m]], lw=0.5, zorder=3,
                         label=f'$m={m:+d}$ (mod.)')
+    else: # Bach data points
+        for m in [-1, 1]:
+            ax.errorbar([], [], c=sc['black'], fmt='o', marker=markers[m],
+                        markersize=markersizes[m], label=f'$m={m:+d}$ (Bach Research)')
 
     for i, (m, wavs, effs_obs) in enumerate(data):
 
         ax.errorbar(wavs, effs_obs, yerr=err[i][2],
                     c=sc[colors[m]], fmt='o', marker=markers[m],
                     markersize=markersizes[m], zorder=4)
+        
+        # Plot Bach data points
+        if panel == 'panel1':
+            if m == -1:
+                ax.errorbar([405], [24],
+                            c=sc['black'], fmt='o', marker=markers[m],
+                            markersize=markersizes[m], zorder=4)
+            elif m == 1:
+                ax.errorbar([405], [19],
+                            c=sc['black'], fmt='o', marker=markers[m],
+                            markersize=markersizes[m], zorder=4)
+        elif panel == 'panel2':
+            if m == -1:
+                ax.errorbar([405], [12.5],
+                            c=sc['black'], fmt='o', marker=markers[m],
+                            markersize=markersizes[m], zorder=4)
+            elif m == 1:
+                ax.errorbar([405], [14],
+                            c=sc['black'], fmt='o', marker=markers[m],
+                            markersize=markersizes[m], zorder=4)
+        else:
+            if m == -1:
+                ax.errorbar([405], [25],
+                            c=sc['black'], fmt='o', marker=markers[m],
+                            markersize=markersizes[m], zorder=4)
+            elif m == 1:
+                ax.errorbar([405], [19],
+                            c=sc['black'], fmt='o', marker=markers[m],
+                            markersize=markersizes[m], zorder=4)
 
         best_curve = smooth_model(wav_fine, model_de(gr_dens, m, dt, land), config.BANDPASS)
         if m < 0:
@@ -508,8 +541,9 @@ def make_keystone_figure(results, num_samples=1000):
     axs[2].set_xlabel('Wavelength (nm)', fontsize=9)
     for i in range(3):
         axs[i].set_ylabel('Diffraction Efficiency (\%)', fontsize=9)
-    for i in range(2):
-        axs[i].legend(loc=2, ncol=2, frameon=False, fontsize=9)
+    for i in range(3):
+        if i == 2: axs[i].legend(loc=2, ncol=1, frameon=False, fontsize=9)
+        else: axs[i].legend(loc=2, ncol=2, frameon=False, fontsize=9)
 
     axs[0].text(760, 7.5, r'Panel 1, 800 gr mm$^{-1}$', rotation=-90, fontsize=9)
     axs[1].text(760, 9, r'Panel 2, 2000 gr mm$^{-1}$', rotation=-90, fontsize=9)
